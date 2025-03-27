@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<title>IoT Syringe Pump Website</title>
+</head>
+<body data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1073.0" data-new-gr-c-s-loaded="14.1073.0">
+<h1 style="text-align: center;"><span style="color:#333333;"><span style="font-family:georgia,serif;"><u>I<em>oT Syringe Pump System</em></u></span></span></h1>
+
+<h3 style="color:#aaa;font-style:italic;"><span style="color:#666666;"><span style="font-size:14px;"><strong><span style="font-family:georgia,serif;">IoT for Bioengineers Applications and Security&nbsp;Project</span></strong></span></span></h3>
+
+<p><span style="color:#666666;"><span style="font-size:14px;"><span style="font-family:georgia,serif;">Done by: Hud Sliman (1075920), Noora Saeed Alhajeri (1074520)</span></span></span></p>
+
+<hr />
+<p><span style="font-family:georgia,serif;"><strong><em>Please make sure to follow the following procedure:</em></strong></span></p>
+
+<ol>
+	<li>Select the used syringe volume.</li>
+	<li>Select the wanted dose to be disbursed.</li>
+	<li>Select the number of&nbsp;times you would like the dose to be disbursed in how many hours</li>
+	<li>The device will calculate the remaining syringe volume and the doses administered.</li>
+	<li>Please make sure to double-check the dose before clicking <span style="color:#FF0000;"><strong>SUBMIT</strong></span>. Stay Safe, Stay Healthy!</li>
+</ol>
+
+
+<hr />
+<p><span style="font-size:20px;"><u><span style="font-family:georgia,serif;"><em><strong>Selection Criteria:</strong></em></span></u></span></p>
+
+<form action="/Display" method="post">
+<ul>
+	<li><span style="font-size:18px;">Syringe Volume<strong> [5ml, 10ml, 20ml]</strong>:</span></li>
+</ul>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input id="syringeValue" name="syringeValue" type="number" /> ml</p>
+
+<hr />
+<ul>
+	<li><span style="font-size:18px;">Dose Value <strong>[1ml, 2ml, 3ml, 5ml]</strong>: </span></li>
+</ul>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input id="doseValue" name="doseValue" type="number" /> ml</p>
+
+<hr />
+<ul>
+	<li><span style="font-size:18px;">How many times do you want to repeat this dose <strong>[Now (1), 2 Times, 3 Times, 4 Times]</strong>?</span></li>
+</ul>
+
+<p>​&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<input id="doseRepeat" name="doseRepeat" type="number" />&nbsp;Times</p>
+
+<hr />
+<ul>
+	<li>&nbsp;<span style="font-size:18px;">In how many hours do you want this action to be repeated <strong>[Now (0), Every 1 hour, Every 2 hours, Every 4 hours, Every 8 hours]?</strong></span></li>
+</ul>
+
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Every​ <input name="doseHours" type="number" /> hours</p>
+
+<p style="text-align: center;">&nbsp;</p>
+
+<p style="text-align: center;"><span style="font-size:18px;"><span style="font-family:times new roman,times,serif;"><strong><span style="color:#FF0000;">This action can not be undone, please double-check, in case of </span></strong></span></span></p>
+
+<p style="text-align: center;"><span style="font-size:16px;"><span style="font-family:georgia,serif;"><span style="font-size:18px;"><span style="font-family:times new roman,times,serif;"><strong><span style="color:#FF0000;">an emergency switch the power off!</span></strong></span></span></span></span></p>
+
+<p style="text-align: center;"><span style="font-size:26px;"><span style="font-family:georgia,serif;"><button onclick="location.href='http://localhost:8080/Display'">Submit</button></span></span></p>
+</form>
+<hr />
+<p><span style="font-size:20px;"><u><span style="font-family:georgia,serif;"><em><strong>Administered and Remaining:</strong></em></span></u></span></p>
+
+<script type="text/javascript">
+   function doseRemain(){
+         syringe = document.getElementById("syringeValue").value;
+         dose = document.getElementById("doseValue").value;
+		 doserepeat = document.getElementById("doseRepeat").value;
+         document.getElementById("Remaining Syringe Volume:").textContent = syringe -(doserepeat * dose);
+   }
+</script>
+<ul>
+	<li>Remaining Syringe Volume: <input type="button" onclick="doseRemain()" value="calculate"/> </li>
+</ul>
+<p> <span id="Remaining Syringe Volume:"></span> ml</p>
+
+
+
+
+
+<script type="text/javascript">
+   function dosesAdministered(){
+         dose = document.getElementById("doseValue").value;
+		 doserepeat = document.getElementById("doseRepeat").value;
+         document.getElementById("Doses administered:").textContent = (doserepeat * dose);
+   }
+</script>
+<ul>
+
+<li>Doses administered:<input type="button" onclick=" dosesAdministered()" value="calculate"/> </li>
+</ul>
+<p> <span id="Doses administered:"> </span> ml</p>
+</body>
+</html>
